@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Illuminate\Container\Container; 
 
 class MakeInertiaTable extends Command
 {
-    use \Illuminate\Console\DetectsApplicationNamespace;
 
     /**
      * The name and signature of the console command.
@@ -108,5 +108,15 @@ class MakeInertiaTable extends Command
         }
 
         $this->info('Model, Controller and Vue Components successfully created.');
+    }
+
+    /**
+     * Get the application namespace.
+     *
+     * @return string
+     */
+    protected function getAppNamespace()
+    {
+        return Container::getInstance()->getNamespace();
     }
 }
